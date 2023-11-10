@@ -8,16 +8,19 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class OrderRepository implements OrderRepositoryInterface
 {
+    public function __construct(protected Order $order)
+    {
+    }
 
     public function getAllOrders($userId)
     {
-        return Order::with('order_details')->where('user_id', $userId)->get();
+        return $this->order->with('order_details')->where('user_id', $userId)->get();
     }
 
     public function getOrderById($userId, $orderId)
     {
-        $items = Order::with('order_details')
-        ->where('user_id', $userId)
+        $items = $this->order->with('order_details')
+            ->where('user_id', $userId)
             ->where('id', $orderId)
             ->get();
         if ($items->count > 0) {
@@ -29,24 +32,23 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function deleteOrder($userId, $orderId)
     {
-        Order::where('user_id', $userId)->destroy($orderId);
+        $this->order->where('user_id', $userId)->destroy($orderId);
     }
 
     public function createOrder(array $orderData)
     {
-        return Order::create($orderData);
+        return $this->order->create($orderData);
     }
 
     public function updateOrder($userId, $orderId, array $orderData)
     {
-        $item = Order::where('user_id',$userId)->where('order_id',$orderId)->get();
-        if(!$item || $item->count < 0){
+        $item = $this->order->where('user_id', $userId)->where('order_id', $orderId)->get();
+        if (!$item || $item->count < 0) {
             throw new ModelNotFoundException();
         }
         $item->update($orderData);
         $item->save();
         return $item;
-//        return Order::whereId($OrderId)->update($OrderData);
     }
 
 

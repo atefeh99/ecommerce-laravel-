@@ -10,7 +10,7 @@ class OrderDetailsRepository implements OrderDetailsRepositoryInterface
 
     public function getAllOrderDetail($orderId)
     {
-        $items = OrderDetails::where('order_id', $orderId)->get();
+        $items = orderDetails::where('order_id', $orderId)->get();
         if ($items->count > 0) {
             return $items;
         } else {
@@ -25,13 +25,13 @@ class OrderDetailsRepository implements OrderDetailsRepositoryInterface
 
     public function deleteOrderDetail($orderDetailId)
     {
-        OrderDetails::destroy($orderDetailId);
+        orderDetails::destroy($orderDetailId);
 
     }
 
     public function createOrderDetail(array $orderDetailData)
     {
-        OrderDetails::create($orderDetailData);
+        orderDetails::create($orderDetailData);
     }
 
     public function updateOrderDetail(array $orderDetailData)
@@ -41,7 +41,7 @@ class OrderDetailsRepository implements OrderDetailsRepositoryInterface
 
     public function getOrderDetailByOrderIdAndProductId($orderId, $productId)
     {
-        $item = OrderDetails::where($orderId)->where($productId)->get();
+        $item =  orderDetails::where($orderId)->where($productId)->get();
         if ($item->count > 0) {
             return $item;
         } else {

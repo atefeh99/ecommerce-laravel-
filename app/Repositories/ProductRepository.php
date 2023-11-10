@@ -14,7 +14,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function getProductById($productId)
     {
-        return Product::findOrFail($productId);
+        return Product::findOrFail($productId)->toArray();
     }
 
     public function deleteProduct($productId)

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\OrderDetailsRepositoryInterface;
 use App\Repositories\OrderRepository;
 use App\Repositories\OrderRepositoryInterface;
 use App\Repositories\ProductRepository;
@@ -19,6 +20,8 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
+        $this->app->bind(OrderDetailsRepositoryInterface::class, OrderDetailsRepository::class);
+
     }
 
     /**
