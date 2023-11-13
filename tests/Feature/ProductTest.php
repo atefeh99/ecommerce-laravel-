@@ -22,7 +22,7 @@ class ProductTest extends TestCase
 
         $response = $this->post('/api/products', $productData);
         $response->assertOk();
-        $this->assertJson(json_encode($productData));
-
+        $response->assertStatus(201);
+        $this->assertDatabaseHas('products', $productData);
     }
 }

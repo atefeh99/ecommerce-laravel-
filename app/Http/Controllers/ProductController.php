@@ -35,21 +35,21 @@ class ProductController extends Controller
         );
     }
 
-    public function show(Product $product)
+    public function show(Product $product) : JsonResponse
     {
         return response()->json([
             'data' => $this->productRepository->getProductById($product->id)
         ]);
     }
 
-    public function updateItem(UpdateProductRequest $request, $id)
+    public function updateItem(UpdateProductRequest $request, int $id)
     {
         return response()->json([
             'data' => $this->productRepository->updateProduct($id, $request->validated())
         ]);
     }
 
-    public function destroy(Product $product)
+    public function destroy(Product $product) : JsonResponse
     {
         $this->productRepository->deleteProduct($product->id);
 

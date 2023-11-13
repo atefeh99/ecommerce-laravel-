@@ -16,12 +16,12 @@ class OrderServiceTest extends TestCase
         Mockery::close();
     }
 
-    public function it_deletes_order_and_order_details()
+    public function deletes_order_and_order_details()
     {
         // Arrange
         $userId = 'ae003aec-2b2e-4ebc-be43-c0809429c5b2';
         $orderId = 1;
-
+        //act
         $orderDetailServiceMock = Mockery::mock(OrderDetailService::class);
         $orderDetailServiceMock->shouldReceive('deleteOrderDetailsByOrderId')->with($orderId)->once();
 
@@ -31,7 +31,7 @@ class OrderServiceTest extends TestCase
         $orderService = new OrderService($orderDetailServiceMock, $orderRepositoryMock);
 
         $result = $orderService->deleteItem($userId, $orderId);
-
+        //assert
         $this->assertIsArray($result);
         $this->assertNotEmpty($result);
     }

@@ -49,7 +49,7 @@ class OrderController extends Controller
         ]);
     }
 
-    public function updateItem(UpdateOrderRequest $request, $id)
+    public function updateItem(UpdateOrderRequest $request,int $id)
     {
         $data = $this->orderService->updateItem($this->user_id,$id, $request->validated());
 

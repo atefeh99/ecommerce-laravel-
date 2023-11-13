@@ -17,7 +17,10 @@ class OrderDetailsFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'product_id' => fake()->integer(),
+            'order_id' => fake()->integer(),
+            'quantity' => fake()->integer(),
+            'id' => fake()->integer()
         ];
     }
 }
